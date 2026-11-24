@@ -1,45 +1,104 @@
-// Find the elements from our HTML
+// Find all our website elements
 
 const envelope = document.getElementById("envelope");
 const untie = document.getElementById("untie");
 
-const openingScreen = document.getElementById("opening-screen");
-const invitationScreen = document.getElementById("invitation-screen");
+const openEnvelope = document.getElementById("open-envelope");
+const laceCard = document.getElementById("lace-card");
+
+const titleSection = document.getElementById("title-section");
+const stationery = document.getElementById("stationery");
 
 
-// Function that opens the invitation
+// Prevent the animation from running twice
 
-function openInvitation() {
+let hasOpened = false;
 
-    // Prevent multiple clicks
+
+// Check accessibility preferences
+
+const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+
+// Helper function for animation timing
+
+function wait(milliseconds) {
+
+    return new Promise(resolve => {
+
+        setTimeout(
+            resolve,
+            reduceMotion ? 0 : milliseconds
+        );
+
+    });
+
+}
+
+
+// Main envelope opening animation
+
+async function openInvitation() {
+
+    if (hasOpened) return;
+
+    hasOpened = true;
+
     envelope.disabled = true;
     untie.disabled = true;
 
-    // Fade out the opening screen
-    openingScreen.classList.add("fade-out");
 
-    // Check the visitor's motion preference
-    const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
+    // STEP 1: Hide the instruction
 
-    // Wait for the fade-out to finish
-    setTimeout(function () {
+    untie.classList.add("disappear");
 
-        // Hide the opening screen
-        openingScreen.hidden = true;
 
-        // Show the invitation
-        invitationScreen.hidden = false;
+    // STEP 2: Transition to the open envelope
 
-        // Fade in the invitation
-        invitationScreen.classList.add("fade-in");
+    openEnvelope.classList.add("visible");
+    envelope.classList.add("disappear");
 
-    }, reduceMotion ? 0 : 800);
+    await wait(850);
+
+    envelope.hidden = true;
+    untie.hidden = true;
+
+
+    // STEP 3: Slide the lace invitation out
+
+    laceCard.classList.add("emerging");
+
+    await wait(1400);
+
+
+    // STEP 4: Arrange the stationery
+
+    openEnvelope.classList.add("settled");
+    laceCard.classList.add("settled");
+
+    stationery.classList.add("finished");
+
+
+    // STEP 5: Reveal the holiday title
+
+    await wait(300);
+
+    titleSection.classList.add("visible");
+
+
+    // STEP 6: Enable the invitation controls
+
+    await wait(1200);
+
+    laceCard.removeAttribute("inert");
+    laceCard.setAttribute("aria-hidden", "false");
+
 }
-
 
 // Listen for clicks
 
 envelope.addEventListener("click", openInvitation);
+
 untie.addEventListener("click", openInvitation);
