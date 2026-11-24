@@ -189,7 +189,7 @@ body {
     background-repeat: no-repeat;
 
     margin: 35px auto;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: none;
 
     container-type: inline-size;
 }
