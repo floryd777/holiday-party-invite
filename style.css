@@ -43,32 +43,58 @@ body {
 /* Temporary envelope */
 
 .envelope {
-    width: 320px;
+
+/* Closed envelope */
+
+.envelope {
+    width: 420px;
     max-width: 90%;
-    height: 210px;
-    background-color: #8B914E;
+    height: auto;
+    aspect-ratio: 1 / 1;
+
+    background-color: transparent;
+    background-image: url("envelope.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+
     border: none;
+    padding: 0;
     cursor: pointer;
     position: relative;
+
+    transition: transform 0.4s ease;
 }
 
-/* Clickable instruction */
+/* Gentle movement when hovering */
 
+.envelope:hover {
+    transform: scale(1.025);
+}
+  
 .instruction {
     background: none;
     border: none;
     color: #F8C5D5;
+
     font-family: 'Cormorant Garamond', serif;
-    font-size: 17px;
-    font-style: italic;
-    letter-spacing: 2px;
-    margin-top: 24px;
+    font-size: 15px;
+    font-weight: 500;
+    font-style: normal;
+
+    text-transform: uppercase;
+    letter-spacing: 3px;
+
+    margin-top: 10px;
     cursor: pointer;
+
+    transition: opacity 0.3s ease;
 }
 
 .instruction:hover {
     opacity: 0.7;
 }
+
 
 
 /* =========================
