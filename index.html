@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Holiday Party</title>
+
+    <title>406's Holiday Party</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Mea+Culpa&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main class="opening-screen">
+    <!-- SCREEN 1: Closed invitation -->
 
-        <p class="subtitle">A little holiday magic...</p>
-
-        <h1>You're Invited</h1>
+    <section class="opening-screen" id="opening-screen">
 
         <button class="envelope" id="envelope"
                 aria-label="Open invitation">
@@ -24,9 +26,44 @@
             <span class="bow"></span>
         </button>
 
-        <p class="instruction">Untie to reveal</p>
+        <button class="instruction" id="untie">
+            Untie to reveal
+        </button>
 
-    </main>
+    </section>
+
+
+    <!-- SCREEN 2: Revealed invitation -->
+
+    <section class="invitation-screen" id="invitation-screen"
+             hidden>
+
+        <div class="title-section">
+
+            <p class="subtitle">You're invited to</p>
+
+            <h1 class="curved-heading">
+                <svg viewBox="0 0 760 160"
+                     role="img"
+                     aria-label="406's Holiday Party">
+
+                    <defs>
+                        <path id="title-curve"
+                              d="M15 137 Q380 55 745 137"/>
+                    </defs>
+
+                    <text class="curved-title">
+                        <textPath href="#title-curve" startOffset="50%">406's Holiday Party</textPath>
+                    </text>
+
+                </svg>
+            </h1>
+
+            <p class="subtitle">A little holiday magic...</p>
+
+        </div>
+
+    </section>
 
     <script src="script.js"></script>
 
