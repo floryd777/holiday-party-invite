@@ -1,0 +1,51 @@
+/* Overall website appearance */
+body {
+    margin: 0;
+    background-color: #F4EBDD;
+    color: #651F30;
+    font-family: Georgia, serif;
+}
+
+/* Opening screen layout */
+.opening-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+/* Main heading */
+h1 {
+    font-size: 48px;
+    font-weight: normal;
+    margin: 10px 0 30px;
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 16px;
+    font-style: italic;
+    letter-spacing: 2px;
+}
+
+/* Instructions */
+.instruction {
+    font-size: 14px;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+/* Temporary envelope */
+.envelope {
+    width: 320px;
+    max-width: 90%;
+    height: 210px;
+    background-color: #304B3C;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
