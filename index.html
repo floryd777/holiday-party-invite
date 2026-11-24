@@ -6,110 +6,127 @@
 
     <title>406's Holiday Party</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Mea+Culpa&family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet">
-    
-    <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=GFS+Didot&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mea+Culpa&family=Cormorant+Garamond:wght@500&family=IM+Fell+English:ital@0;1&family=GFS+Didot&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <!-- SCREEN 1: Closed invitation -->
+    <!-- Main holiday title -->
 
-    <section class="opening-screen" id="opening-screen">
+    <header class="title-section" id="title-section">
 
-        <button class="envelope" id="envelope"
-                aria-label="Open invitation">
-            <span class="envelope-back"></span>
-            <span class="letter"></span>
-            <span class="envelope-front"></span>
-            <span class="envelope-flap"></span>
-            <span class="bow"></span>
-        </button>
+        <p class="subtitle">You're invited to</p>
 
-        <button class="instruction" id="untie">
-            Untie to reveal
-        </button>
+        <h1 class="curved-heading">
+            <svg viewBox="0 0 760 160"
+                 role="img"
+                 aria-label="406's Holiday Party">
 
-    </section>
+                <defs>
+                    <path id="title-curve"
+                          d="M15 137 Q380 55 745 137"/>
+                </defs>
+
+                <text class="curved-title">
+                    <textPath href="#title-curve"
+                              startOffset="50%">406's Holiday Party</textPath>
+                </text>
+
+            </svg>
+        </h1>
+
+        <p class="subtitle">A little holiday magic...</p>
+
+    </header>
 
 
-    <!-- SCREEN 2: Revealed invitation -->
+    <!-- Interactive stationery -->
 
-    <section class="invitation-screen" id="invitation-screen"
-             hidden>
+    <main class="stationery" id="stationery">
 
-        <div class="title-section">
+        <!-- Open envelope -->
 
-            <p class="subtitle">You're invited to</p>
+        <img class="open-envelope"
+             src="8c20c637-327b-4682-ada9-6449582a08ee.png"
+             alt=""
+             id="open-envelope">
 
-            <h1 class="curved-heading">
-                <svg viewBox="0 0 760 160"
+
+        <!-- Lace invitation -->
+
+        <div class="lace-card" id="lace-card"
+             aria-hidden="true" inert>
+
+            <div class="card-content">
+
+                <svg class="evening-heading"
+                     viewBox="0 0 280 85"
                      role="img"
-                     aria-label="406's Holiday Party">
+                     aria-label="An evening of">
 
                     <defs>
-                        <path id="title-curve"
-                              d="M15 137 Q380 55 745 137"/>
+                        <path id="evening-curve"
+                              d="M10 70 Q140 30 270 70"/>
                     </defs>
 
-                    <text class="curved-title">
-                        <textPath href="#title-curve" startOffset="50%">406's Holiday Party</textPath>
+                    <text>
+                        <textPath href="#evening-curve"
+                                  startOffset="50%">An evening of</textPath>
                     </text>
 
                 </svg>
-            </h1>
 
-            <p class="subtitle">A little holiday magic...</p>
+                <h2 class="celebration">Celebration</h2>
 
-<!-- Lace invitation card -->
+                <p class="card-details">
+                    Dinner &amp; Festivities
+                </p>
 
-<div class="lace-card">
+                <p class="party-date">
+                    Dec 6th @ 6pm
+                </p>
 
-    <div class="card-content">
+                <p class="card-details">
+                    The View
+                    <br>
+                    Apt 406
+                </p>
 
-        <svg class="evening-heading"
-             viewBox="0 0 280 85"
-             role="img"
-             aria-label="An evening of">
+                <button class="rsvp-button" type="button">
+                    RSVP
+                </button>
 
-            <defs>
-                <path id="evening-curve"
-                      d="M10 70 Q140 30 270 70"/>
-            </defs>
+            </div>
 
-            <text>
-                <textPath href="#evening-curve"
-                          startOffset="50%">An evening of</textPath>
-            </text>
+        </div>
 
-        </svg>
 
-        <h2 class="celebration">Celebration</h2>
+        <!-- Closed envelope -->
 
-        <p class="card-details">
-            Dinner &amp; Festivities
-        </p>
+        <button class="envelope"
+                id="envelope"
+                aria-label="Open invitation"
+                type="button">
 
-        <p class="party-date">
-            Dec 6th @ 6pm
-        </p>
+            <img src="67329b44-095a-4d32-bb2b-7d4ea5e1cedb.png"
+                 alt="">
 
-        <p class="card-details">
-            The View
-            <br>
-            Apt 406
-        </p>
-
-        <button class="rsvp-button">
-            RSVP
         </button>
 
-    </div>
 
-</div>
+        <!-- Opening instruction -->
 
-    </section>
+        <button class="instruction"
+                id="untie"
+                type="button">
+
+            Untie to reveal
+
+        </button>
+
+    </main>
 
     <script src="script.js"></script>
 
