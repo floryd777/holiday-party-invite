@@ -3,8 +3,13 @@
    WEBSITE BACKGROUND
    ========================= */
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
+    min-height: 100vh;
 
     background: repeating-linear-gradient(
         90deg,
@@ -14,9 +19,9 @@ body {
 
     color: #F8C5D5;
     font-family: 'Cormorant Garamond', serif;
-}
 
-/* Keep hidden sections invisible */
+    overflow-x: hidden;
+}
 
 [hidden] {
     display: none !important;
@@ -24,97 +29,32 @@ body {
 
 
 /* =========================
-   SCREEN 1: ENVELOPE
+   MAIN HOLIDAY TITLE
    ========================= */
-
-.opening-screen {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 24px;
-    box-sizing: border-box;
-
-    transition: opacity 0.8s ease;
-}
-
-
-.envelope {
-    width: 420px;
-    max-width: 90%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-
-    background-color: transparent;
-    background-image: url("67329b44-095a-4d32-bb2b-7d4ea5e1cedb.png");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    position: relative;
-
-    transition: transform 0.4s ease;
-}
-
-/* Gentle movement when hovering */
-
-.envelope:hover {
-    transform: scale(1.025);
-}
-  
-.instruction {
-    background: none;
-    border: none;
-    color: #F8C5D5;
-
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 15px;
-    font-weight: 500;
-    font-style: normal;
-
-    text-transform: uppercase;
-    letter-spacing: 3px;
-
-    margin-top: 10px;
-    cursor: pointer;
-
-    transition: opacity 0.3s ease;
-}
-
-.instruction:hover {
-    opacity: 0.7;
-}
-
-
-
-/* =========================
-   SCREEN 2: INVITATION
-   ========================= */
-
-.invitation-screen {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 24px;
-    box-sizing: border-box;
-}
-
-/* Title container */
 
 .title-section {
-    width: 100%;
+    width: 90%;
     max-width: 760px;
+
+    margin: 0 auto;
+    text-align: center;
+
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+
+    transition:
+        opacity 1.2s ease,
+        max-height 1.2s ease,
+        margin 1.2s ease;
 }
 
-/* Matching smaller text */
+.title-section.visible {
+    max-height: 300px;
+    opacity: 1;
+    overflow: visible;
+    margin: 60px auto 20px;
+}
 
 .subtitle {
     font-family: 'Cormorant Garamond', serif;
@@ -124,8 +64,6 @@ body {
     letter-spacing: 3px;
     margin: 0;
 }
-
-/* Curved heading */
 
 .curved-heading {
     margin: -7px auto;
@@ -138,14 +76,13 @@ body {
     overflow: visible;
 }
 
-/* Main title lettering */
-
 .curved-title {
     font-family: 'Mea Culpa', cursive;
     font-size: 81px;
     font-weight: normal;
     letter-spacing: 2.5px;
     word-spacing: 1px;
+
     text-anchor: middle;
     fill: #F8C5D5;
 
@@ -158,67 +95,230 @@ body {
 
 
 /* =========================
-   TRANSITION ANIMATIONS
+   STATIONERY CONTAINER
    ========================= */
 
-.fade-out {
-    opacity: 0;
+.stationery {
+    position: relative;
+
+    width: 94%;
+    max-width: 850px;
+    height: 100vh;
+
+    margin: 0 auto;
+
+    isolation: isolate;
+
+    transition: height 1.2s ease;
 }
 
-.fade-in {
-    animation: reveal 1.5s ease both;
+.stationery.finished {
+    height: min(850px, 125vw);
 }
 
-@keyframes reveal {
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Accessibility: reduce motion if requested */
-
-@media (prefers-reduced-motion: reduce) {
-    .opening-screen {
-        transition: none;
-    }
-
-    .fade-in {
-        animation: none;
-    }
-}
 
 /* =========================
-   VINTAGE LACE INVITATION
+   CLOSED ENVELOPE
+   ========================= */
+
+.envelope {
+    position: absolute;
+
+    width: 420px;
+    max-width: 85%;
+    aspect-ratio: 1 / 1;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    background: transparent;
+    border: none;
+    padding: 0;
+
+    cursor: pointer;
+    z-index: 5;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.4s ease;
+}
+
+.envelope img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.envelope:hover {
+    transform: translate(-50%, -50%) scale(1.025);
+}
+
+.envelope.disappear {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* =========================
+   UNTIE TO REVEAL
+   ========================= */
+
+.instruction {
+    position: absolute;
+
+    top: calc(50% + min(220px, 43vw));
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: none;
+    border: none;
+
+    color: #F8C5D5;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    white-space: nowrap;
+
+    cursor: pointer;
+    z-index: 6;
+
+    transition: opacity 0.5s ease;
+}
+
+.instruction.disappear {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* =========================
+   OPEN FLORAL ENVELOPE
+   ========================= */
+
+.open-envelope {
+    position: absolute;
+
+    width: 480px;
+    max-width: 75%;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    opacity: 0;
+    z-index: 3;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.8s ease,
+        transform 1.4s ease,
+        top 1.4s ease,
+        left 1.4s ease;
+}
+
+.open-envelope.visible {
+    opacity: 1;
+}
+
+.open-envelope.settled {
+    top: 48%;
+    left: 35%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-11deg);
+
+    z-index: 1;
+}
+
+
+/* =========================
+   GREEN LACE INVITATION
    ========================= */
 
 .lace-card {
-    position: relative;
+    position: absolute;
 
-    width: 100%;
-    max-width: 520px;
+    width: 520px;
+    max-width: 65%;
     aspect-ratio: 5 / 7;
 
+    top: 50%;
+    left: 50%;
+
     background-image: url("f69677af-80c7-4d52-b080-0414b8c96f96.png");
+
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
+    background-color: transparent;
 
-    margin: 35px auto;
     box-shadow: none;
+    filter: none;
 
     container-type: inline-size;
+
+    opacity: 0;
+
+    transform:
+        translate(-50%, -10%)
+        scale(0.65);
+
+    clip-path: inset(0 0 100% 0);
+
+    z-index: 2;
+    pointer-events: none;
+
+    transition:
+        opacity 0.7s ease,
+        transform 1.4s ease,
+        clip-path 1.4s ease,
+        top 1.4s ease,
+        left 1.4s ease;
 }
 
-/* Position the text inside the lace */
+.lace-card.emerging {
+    opacity: 1;
+
+    transform:
+        translate(-50%, -75%)
+        scale(0.85);
+
+    clip-path: inset(0 0 0 0);
+}
+
+.lace-card.settled {
+    top: 48%;
+    left: 62%;
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(2deg)
+        scale(1);
+
+    z-index: 4;
+    pointer-events: auto;
+}
+
+
+/* =========================
+   INVITATION TYPOGRAPHY
+   ========================= */
 
 .card-content {
     position: absolute;
+
     top: 18%;
     bottom: 19%;
     left: 19%;
@@ -232,8 +332,6 @@ body {
     text-align: center;
     color: #65151E;
 }
-
-/* Curved "An evening of" */
 
 .evening-heading {
     width: 100%;
@@ -249,8 +347,6 @@ body {
     fill: #65151E;
 }
 
-/* Straight Celebration heading */
-
 .celebration {
     font-family: 'IM Fell English', serif;
     font-style: italic;
@@ -262,11 +358,10 @@ body {
     margin: -2.12cqw 0 0;
 }
 
-/* Smaller invitation details */
-
 .card-details {
     font-family: 'GFS Didot', serif;
     font-size: 2.88cqw;
+
     letter-spacing: 1px;
     text-transform: uppercase;
     line-height: 1.5;
@@ -274,16 +369,13 @@ body {
     margin: 4.04cqw 0;
 }
 
-/* Date and time */
-
 .party-date {
     font-family: 'IM Fell English', serif;
     font-style: italic;
     font-size: 5.77cqw;
+
     margin: 0;
 }
-
-/* RSVP button */
 
 .rsvp-button {
     background: none;
@@ -291,14 +383,77 @@ body {
 
     font-family: 'GFS Didot', serif;
     font-size: 4.62cqw;
+
     letter-spacing: 3px;
     color: #65151E;
 
     padding: 8px;
     cursor: pointer;
+
     transition: opacity 0.3s ease;
 }
 
 .rsvp-button:hover {
     opacity: 0.6;
+}
+
+
+/* =========================
+   MOBILE PHONE LAYOUT
+   ========================= */
+
+@media (max-width: 600px) {
+
+    .title-section.visible {
+        margin-top: 40px;
+    }
+
+    .subtitle {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .stationery.finished {
+        height: 145vw;
+    }
+
+    .open-envelope {
+        max-width: 83%;
+    }
+
+    .open-envelope.settled {
+        left: 37%;
+        top: 43%;
+    }
+
+    .lace-card {
+        max-width: 77%;
+    }
+
+    .lace-card.settled {
+        left: 57%;
+        top: 52%;
+    }
+
+    .card-details {
+        letter-spacing: 0.5px;
+    }
+
+    .rsvp-button {
+        padding: 4px;
+        letter-spacing: 2px;
+    }
+}
+
+
+/* =========================
+   REDUCED MOTION
+   ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
 }
