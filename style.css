@@ -1,13 +1,81 @@
-/* Overall website appearance */
+
+/* =========================
+   WEBSITE BACKGROUND
+   ========================= */
+
 body {
     margin: 0;
-    background-color: #F4EBDD;
-    color: #651F30;
-    font-family: Georgia, serif;
+
+    background: repeating-linear-gradient(
+        90deg,
+        #490F1B 0px 32px,
+        #3F0D17 32px 64px
+    );
+
+    color: #F8C5D5;
+    font-family: 'Cormorant Garamond', serif;
 }
 
-/* Opening screen layout */
+/* Keep hidden sections invisible */
+
+[hidden] {
+    display: none !important;
+}
+
+
+/* =========================
+   SCREEN 1: ENVELOPE
+   ========================= */
+
 .opening-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 24px;
+    box-sizing: border-box;
+
+    transition: opacity 0.8s ease;
+}
+
+/* Temporary envelope */
+
+.envelope {
+    width: 320px;
+    max-width: 90%;
+    height: 210px;
+    background-color: #8B914E;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Clickable instruction */
+
+.instruction {
+    background: none;
+    border: none;
+    color: #F8C5D5;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-style: italic;
+    letter-spacing: 2px;
+    margin-top: 24px;
+    cursor: pointer;
+}
+
+.instruction:hover {
+    opacity: 0.7;
+}
+
+
+/* =========================
+   SCREEN 2: INVITATION
+   ========================= */
+
+.invitation-screen {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -18,34 +86,88 @@ body {
     box-sizing: border-box;
 }
 
-/* Main heading */
-h1 {
-    font-size: 48px;
-    font-weight: normal;
-    margin: 10px 0 30px;
+/* Title container */
+
+.title-section {
+    width: 100%;
+    max-width: 760px;
 }
 
-/* Subtitle */
+/* Matching smaller text */
+
 .subtitle {
-    font-size: 16px;
-    font-style: italic;
-    letter-spacing: 2px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin: 0;
 }
 
-/* Instructions */
-.instruction {
-    font-size: 14px;
-    font-style: italic;
-    letter-spacing: 1px;
+/* Curved heading */
+
+.curved-heading {
+    margin: -7px auto;
+    font-weight: normal;
 }
 
-/* Temporary envelope */
-.envelope {
-    width: 320px;
-    max-width: 90%;
-    height: 210px;
-    background-color: #304B3C;
-    border: none;
-    cursor: pointer;
-    position: relative;
+.curved-heading svg {
+    display: block;
+    width: 100%;
+    overflow: visible;
+}
+
+/* Main title lettering */
+
+.curved-title {
+    font-family: 'Mea Culpa', cursive;
+    font-size: 81px;
+    font-weight: normal;
+    letter-spacing: 2.5px;
+    word-spacing: 1px;
+    text-anchor: middle;
+    fill: #F8C5D5;
+
+    text-shadow:
+        1px 1px #9C1525,
+        2px 2px #9C1525,
+        3px 3px #9C1525,
+        4px 4px #9C1525;
+}
+
+
+/* =========================
+   TRANSITION ANIMATIONS
+   ========================= */
+
+.fade-out {
+    opacity: 0;
+}
+
+.fade-in {
+    animation: reveal 1.5s ease both;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Accessibility: reduce motion if requested */
+
+@media (prefers-reduced-motion: reduce) {
+    .opening-screen {
+        transition: none;
+    }
+
+    .fade-in {
+        animation: none;
+    }
 }
