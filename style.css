@@ -40,11 +40,6 @@ body {
     transition: opacity 0.8s ease;
 }
 
-/* Temporary envelope */
-
-.envelope {
-
-/* Closed envelope */
 
 .envelope {
     width: 420px;
